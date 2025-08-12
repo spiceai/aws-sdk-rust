@@ -24,14 +24,17 @@ pub fn ser_query_vectors_input_input(
     if let Some(var_7) = &input.return_metadata {
         object.key("returnMetadata").boolean(*var_7);
     }
-    if let Some(var_8) = &input.top_k {
+    if let Some(var_8) = &input.return_metadata {
+        object.key("returnData").boolean(*var_8);
+    }
+    if let Some(var_9) = &input.top_k {
         object.key("topK").number(
             #[allow(clippy::useless_conversion)]
-            ::aws_smithy_types::Number::NegInt((*var_8).into()),
+            ::aws_smithy_types::Number::NegInt((*var_9).into()),
         );
     }
-    if let Some(var_9) = &input.vector_bucket_name {
-        object.key("vectorBucketName").string(var_9.as_str());
+    if let Some(var_10) = &input.vector_bucket_name {
+        object.key("vectorBucketName").string(var_10.as_str());
     }
     Ok(())
 }

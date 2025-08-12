@@ -15,6 +15,8 @@ pub struct QueryVectorsInput {
     pub query_vector: ::std::option::Option<crate::types::VectorData>,
     /// <p>Metadata filter to apply during the query. For more information about metadata keys, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-vectors-metadata-filtering.html">Metadata filtering</a> in the <i>Amazon S3 User Guide</i>.</p>
     pub filter: ::std::option::Option<::aws_smithy_types::Document>,
+    /// <p>Indicates whether to include data in the response. The default value is <code>false</code>.</p>
+    pub return_data: ::std::option::Option<bool>,
     /// <p>Indicates whether to include metadata in the response. The default value is <code>false</code>.</p>
     pub return_metadata: ::std::option::Option<bool>,
     /// <p>Indicates whether to include the computed distance in the response. The default value is <code>false</code>.</p>
@@ -49,6 +51,10 @@ impl QueryVectorsInput {
     pub fn return_metadata(&self) -> ::std::option::Option<bool> {
         self.return_metadata
     }
+    /// <p>Indicates whether to include data in the response. The default value is <code>false</code>.</p>
+    pub fn return_data(&self) -> ::std::option::Option<bool> {
+        self.return_data
+    }
     /// <p>Indicates whether to include the computed distance in the response. The default value is <code>false</code>.</p>
     pub fn return_distance(&self) -> ::std::option::Option<bool> {
         self.return_distance
@@ -62,7 +68,9 @@ impl QueryVectorsInput {
 }
 
 /// A builder for [`QueryVectorsInput`](crate::operation::query_vectors::QueryVectorsInput).
-#[derive(::std::clone::Clone, ::std::cmp::PartialEq, ::std::default::Default, ::std::fmt::Debug)]
+#[derive(
+    ::std::clone::Clone, ::std::cmp::PartialEq, ::std::default::Default, ::std::fmt::Debug,
+)]
 #[non_exhaustive]
 pub struct QueryVectorsInputBuilder {
     pub(crate) vector_bucket_name: ::std::option::Option<::std::string::String>,
@@ -72,16 +80,23 @@ pub struct QueryVectorsInputBuilder {
     pub(crate) query_vector: ::std::option::Option<crate::types::VectorData>,
     pub(crate) filter: ::std::option::Option<::aws_smithy_types::Document>,
     pub(crate) return_metadata: ::std::option::Option<bool>,
+    pub(crate) return_data: ::std::option::Option<bool>,
     pub(crate) return_distance: ::std::option::Option<bool>,
 }
 impl QueryVectorsInputBuilder {
     /// <p>The name of the vector bucket that contains the vector index.</p>
-    pub fn vector_bucket_name(mut self, input: impl ::std::convert::Into<::std::string::String>) -> Self {
+    pub fn vector_bucket_name(
+        mut self,
+        input: impl ::std::convert::Into<::std::string::String>,
+    ) -> Self {
         self.vector_bucket_name = ::std::option::Option::Some(input.into());
         self
     }
     /// <p>The name of the vector bucket that contains the vector index.</p>
-    pub fn set_vector_bucket_name(mut self, input: ::std::option::Option<::std::string::String>) -> Self {
+    pub fn set_vector_bucket_name(
+        mut self,
+        input: ::std::option::Option<::std::string::String>,
+    ) -> Self {
         self.vector_bucket_name = input;
         self
     }
@@ -139,7 +154,10 @@ impl QueryVectorsInputBuilder {
         self
     }
     /// <p>The query vector. Ensure that the query vector has the same dimension as the dimension of the vector index that's being queried. For example, if your vector index contains vectors with 384 dimensions, your query vector must also have 384 dimensions.</p>
-    pub fn set_query_vector(mut self, input: ::std::option::Option<crate::types::VectorData>) -> Self {
+    pub fn set_query_vector(
+        mut self,
+        input: ::std::option::Option<crate::types::VectorData>,
+    ) -> Self {
         self.query_vector = input;
         self
     }
@@ -153,7 +171,10 @@ impl QueryVectorsInputBuilder {
         self
     }
     /// <p>Metadata filter to apply during the query. For more information about metadata keys, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-vectors-metadata-filtering.html">Metadata filtering</a> in the <i>Amazon S3 User Guide</i>.</p>
-    pub fn set_filter(mut self, input: ::std::option::Option<::aws_smithy_types::Document>) -> Self {
+    pub fn set_filter(
+        mut self,
+        input: ::std::option::Option<::aws_smithy_types::Document>,
+    ) -> Self {
         self.filter = input;
         self
     }
@@ -175,6 +196,20 @@ impl QueryVectorsInputBuilder {
     pub fn get_return_metadata(&self) -> &::std::option::Option<bool> {
         &self.return_metadata
     }
+    /// <p>Indicates whether to include metadata in the response. The default value is <code>false</code>.</p>
+    pub fn return_data(mut self, input: bool) -> Self {
+        self.return_data = ::std::option::Option::Some(input);
+        self
+    }
+    /// <p>Indicates whether to include metadata in the response. The default value is <code>false</code>.</p>
+    pub fn set_return_data(mut self, input: ::std::option::Option<bool>) -> Self {
+        self.return_data = input;
+        self
+    }
+    /// <p>Indicates whether to include metadata in the response. The default value is <code>false</code>.</p>
+    pub fn get_return_data(&self) -> &::std::option::Option<bool> {
+        &self.return_data
+    }
     /// <p>Indicates whether to include the computed distance in the response. The default value is <code>false</code>.</p>
     pub fn return_distance(mut self, input: bool) -> Self {
         self.return_distance = ::std::option::Option::Some(input);
@@ -192,7 +227,10 @@ impl QueryVectorsInputBuilder {
     /// Consumes the builder and constructs a [`QueryVectorsInput`](crate::operation::query_vectors::QueryVectorsInput).
     pub fn build(
         self,
-    ) -> ::std::result::Result<crate::operation::query_vectors::QueryVectorsInput, ::aws_smithy_types::error::operation::BuildError> {
+    ) -> ::std::result::Result<
+        crate::operation::query_vectors::QueryVectorsInput,
+        ::aws_smithy_types::error::operation::BuildError,
+    > {
         ::std::result::Result::Ok(crate::operation::query_vectors::QueryVectorsInput {
             vector_bucket_name: self.vector_bucket_name,
             index_name: self.index_name,
@@ -201,6 +239,7 @@ impl QueryVectorsInputBuilder {
             query_vector: self.query_vector,
             filter: self.filter,
             return_metadata: self.return_metadata,
+            return_data: self.return_data,
             return_distance: self.return_distance,
         })
     }
